@@ -5,7 +5,7 @@ import ContactSection from "components/ContactSection";
 function ContactPage(props) {
   return (
     <>
-      <Meta title="Contact" />
+      <Meta title="Contact" description="Get in touch with Sravs Signature Bakes for enquiries, orders, or feedback." />
       <ContactSection
         title="Get in touch"
         subtitle="If something does not make sense, feel free to contact us and we will get back to you as soon as possible."

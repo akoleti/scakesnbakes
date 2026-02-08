@@ -78,7 +78,7 @@ function Navbar(props) {
               </li>
               <li className="relative group">
                 <Link href="/order" legacyBehavior passHref>
-                  <a className={classes.navLink}><span>Order</span></a>
+                  <a className={classes.navLink}><span>Order now</span></a>
                 </Link>
               </li>
             </ul>
@@ -108,8 +108,8 @@ function Navbar(props) {
                 <Link href="/contact" legacyBehavior passHref>
                   <a className={classes.dropdown.link}>Contact</a>
                 </Link>
-                <Link href="/order" legacyBehavior passHref>
-                  <a className={classes.dropdown.link}>Order</a>
+<Link href="/order" legacyBehavior passHref>
+                <a className={classes.dropdown.link}>Order now</a>
                 </Link>
               </nav>
             </div>
