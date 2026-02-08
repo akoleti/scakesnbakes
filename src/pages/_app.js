@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { Great_Vibes, Cormorant_Garamond } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "styles/global.css";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
@@ -54,6 +55,7 @@ function MyApp({ Component, pageProps }) {
           sticky={false}
         />
       </>
+      <Analytics />
     </div>
   );
 }
