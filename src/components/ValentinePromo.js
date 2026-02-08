@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import Section from "components/Section";
 import SectionHeader from "components/SectionHeader";
+import { getValentinePromoEndDate } from "@/lib/siteConfig";
 
-const PROMO_END = new Date(new Date().getFullYear(), 1, 15); // Feb 15 00:00 – hide from then
+/** Promo is hidden after this date. Configure in src/lib/siteConfig.js (VALENTINE_PROMO_END_MONTH / VALENTINE_PROMO_END_DAY). */
+const PROMO_END = getValentinePromoEndDate();
 
 const CUPCAKE_BOUQUET_IMAGES = [
   { src: "/products/sravs-bakes-27.jpeg", alt: "Cupcake bouquet" },
@@ -17,7 +20,7 @@ const CAROUSEL_AUTO_MS = 4500;
 
 function ValentinePromo(props) {
   const now = new Date();
-  if (now >= PROMO_END) return null;
+  if (PROMO_END && now >= PROMO_END) return null;
 
   const [index, setIndex] = useState(0);
   const slides = CUPCAKE_BOUQUET_IMAGES.length;
@@ -50,7 +53,7 @@ function ValentinePromo(props) {
         />
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.35fr] gap-10 items-center max-w-6xl mx-auto">
           <div className="space-y-4">
-            <p className="text-center lg:text-left text-gray-700">
+            <p className="text-center lg:text-left text-muted-foreground">
               Our 7-count cupcake bouquets are perfect for Valentine's Day—beautiful, delicious, and ready to gift.
             </p>
             <div className="relative overflow-hidden rounded-xl shadow-xl ring-1 ring-black/5 aspect-square max-w-sm mx-auto lg:mx-0 bg-gray-100">
@@ -64,10 +67,12 @@ function ValentinePromo(props) {
                     zIndex: i === index ? 1 : 0,
                   }}
                 >
-                  <img
+                  <Image
                     src={img.src}
                     alt={img.alt}
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                   />
                 </div>
               ))}
@@ -128,7 +133,6 @@ function ValentinePromo(props) {
               title="Cupcake bouquet"
             >
               <source src={`${VIDEO_PATH}.mp4`} type="video/mp4" />
-              <source src={`${VIDEO_PATH}.webm`} type="video/webm" />
               Your browser does not support the video tag.
             </video>
           </div>

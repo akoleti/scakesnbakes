@@ -12,7 +12,7 @@ function SectionHeader(props) {
       }
     >
       {props.strapline && (
-        <div className="text-sm uppercase font-bold tracking-wider mb-1 text-blue-700">
+        <div className="text-sm uppercase font-bold tracking-wider mb-1 text-primary">
           {props.strapline}
         </div>
       )}

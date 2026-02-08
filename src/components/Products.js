@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import Section from "components/Section";
 import SectionHeader from "components/SectionHeader";
@@ -23,12 +24,12 @@ function Products(props) {
       role: "Individually wrapped, assorted flavors",
     },
     {
-      avatar: "https://images.unsplash.com/photo-1509440159596-0249088772ff?crop=entropy&fit=crop&h=800&q=80&w=640",
+      avatar: "/products/sravs-bakes-11.jpeg",
       name: "Bread Loaves",
       role: "Fresh-baked daily",
     },
     {
-      avatar: "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?crop=entropy&fit=crop&h=800&q=80&w=640",
+      avatar: "/products/sravs-bakes-07.jpeg",
       name: "Brownies",
       role: "Fudgy & chewy",
     },
@@ -43,7 +44,7 @@ function Products(props) {
       role: "Kids' themes, characters & personalized",
     },
     {
-      avatar: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?crop=entropy&fit=crop&h=800&q=80&w=640",
+      avatar: "/products/sravs-bakes-03.jpeg",
       name: "Birthday Party Orders",
       role: "Full dessert spreads",
     },
@@ -99,7 +100,7 @@ function Products(props) {
             >
               <a className="text-center block group">
                 <span
-                  className="block relative overflow-hidden rounded-xl shadow-lg ring-1 ring-black/5 active:opacity-75 mb-3 cursor-zoom-in"
+                  className="block relative overflow-hidden rounded-xl shadow-lg ring-1 ring-black/5 active:opacity-75 mb-3 cursor-zoom-in aspect-square"
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -124,14 +125,16 @@ function Products(props) {
                 >
                   <div className="absolute top-0 right-0 w-16 h-16 -mt-8 -mr-8 transform transition ease-out duration-150 rotate-45 scale-0 group-hover:scale-125 bg-white z-10" />
                   <div className="absolute bottom-0 left-0 w-16 h-16 -mb-8 -ml-8 transform transition ease-out duration-150 rotate-45 scale-0 group-hover:scale-125 bg-white z-10" />
-                  <img
-                    className="rounded-xl object-cover w-full aspect-square transform transition ease-out duration-200 group-hover:scale-105"
+                  <Image
                     src={product.avatar}
                     alt={product.name}
+                    fill
+                    className="rounded-xl object-cover transform transition ease-out duration-200 group-hover:scale-105"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   />
                 </span>
-                <h4 className="text-xl font-semibold mb-1 text-gray-900 group-hover:text-primary">{product.name}</h4>
-                <p className="text-gray-600 font-medium">{product.role}</p>
+                <h4 className="text-xl font-semibold mb-1 text-foreground group-hover:text-primary">{product.name}</h4>
+                <p className="text-muted-foreground font-medium">{product.role}</p>
               </a>
             </Link>
           ))}

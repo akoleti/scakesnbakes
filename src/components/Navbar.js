@@ -23,10 +23,10 @@ function Navbar(props) {
         "bg-white shadow-xl ring-1 ring-black ring-opacity-5 rounded-lg overflow-hidden",
       title:
         "text-xs uppercase font-semibold tracking-wider text-foreground mb-5",
-      link: "text-gray-600 hover:text-foreground font-medium text-sm flex items-center space-x-2",
+      link: "text-muted-foreground hover:text-foreground font-medium text-sm flex items-center space-x-2",
       icon: "opacity-25 inline-block w-5 h-5",
       feature:
-        "p-3 rounded-xl flex items-center space-x-4 text-gray-600 font-medium text-sm",
+        "p-3 rounded-xl flex items-center space-x-4 text-muted-foreground font-medium text-sm",
       featureName: "font-semibold mb-1",
       featureDescription: "opacity-75",
     },
@@ -34,10 +34,10 @@ function Navbar(props) {
       base: "absolute right-0 origin-top-right mt-2 w-48 z-10",
       inner:
         "bg-white ring-1 ring-black ring-opacity-5 rounded divide-y divide-gray-100 shadow-xl rounded",
-      link: "flex items-center space-x-2 rounded py-2 px-3 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-700",
-      linkActive: "text-gray-700 bg-gray-100",
+      link: "flex items-center space-x-2 rounded py-2 px-3 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground",
+      linkActive: "text-foreground bg-muted",
       linkInactive:
-        "text-gray-600 hover:bg-gray-100 hover:text-gray-700 focus:outline-none focus:bg-gray-100 focus:text-gray-700",
+        "text-muted-foreground hover:bg-muted hover:text-foreground focus:outline-none focus:bg-muted focus:text-foreground",
       icon: "opacity-50 inline-block w-5 h-5",
     },
   };

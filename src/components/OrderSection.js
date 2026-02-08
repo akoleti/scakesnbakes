@@ -176,7 +176,7 @@ function OrderSection(props) {
               </span>
             </p>
           )}
-          <p className="text-center text-gray-600 max-w-xl mx-auto">
+          <p className="text-center text-muted-foreground max-w-xl mx-auto">
             Browse our <Link href="/products" legacyBehavior passHref><a className="text-primary font-medium hover:underline">products</a></Link> or{" "}
             <Link href="/gallery" legacyBehavior passHref><a className="text-primary font-medium hover:underline">gallery</a></Link> for ideas.
           </p>
@@ -230,7 +230,7 @@ function OrderSection(props) {
                   ))}
                 </select>
                 {selectedProduct && (
-                  <p className="mt-2 text-sm text-gray-600">
+                  <p className="mt-2 text-sm text-muted-foreground">
                     {selectedPrice ? (
                       <span><strong>Price:</strong> {selectedPrice}</span>
                     ) : (
@@ -259,7 +259,7 @@ function OrderSection(props) {
                     accept="image/*"
                     className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm file:mr-3 file:rounded-md file:border-0 file:bg-primary file:px-4 file:py-2 file:text-sm file:font-medium file:text-primary-foreground file:cursor-pointer"
                   />
-                  <p className="mt-1 text-xs text-gray-500">Upload a photo of the design or cake you&apos;d like.</p>
+                  <p className="mt-1 text-xs text-muted-foreground">Upload a photo of the design or cake you&apos;d like.</p>
                 </div>
               )}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">

@@ -55,16 +55,16 @@ function StatsSection2(props) {
               <a className="group relative block p-4 lg:p-6 bg-white rounded-xl transition duration-150 shadow-md shadow-gray-100">
                 <div className="absolute inset-0 bg-white rounded-xl shadow-md shadow-gray-200 transition duration-100 scale-100 opacity-0 group-hover:opacity-100 group-hover:scale-105 group-active:scale-100 group-active:opacity-0" />
                 <div className="relative text-center">
-                  <div className="text-xs uppercase text-gray-400 font-semibold tracking-wider mb-4">
+                  <div className="text-xs uppercase text-muted-foreground font-semibold tracking-wider mb-4">
                     {stat.title}
                   </div>
                   <div className="relative w-12 mb-8 text-primary mx-auto">
                     <stat.icon className="inline-block w-12 h-12 relative" />
                   </div>
-                  <h4 className="text-xl lg:text-2xl font-extrabold text-gray-900">
+                  <h4 className="text-xl lg:text-2xl font-extrabold text-foreground">
                     {stat.count}
                   </h4>
-                  <div className="flex justify-center items-center space-x-1 mt-4 pt-4 text-sm font-medium text-gray-500 border-t border-gray-100 group-hover:text-primary">
+                  <div className="flex justify-center items-center space-x-1 mt-4 pt-4 text-sm font-medium text-muted-foreground border-t border-border group-hover:text-primary">
                     <span>More Details</span>
                     <ArrowRightIcon className="inline-block w-5 h-5 transition opacity-25 group-hover:opacity-75 group-hover:translate-x-2" />
                   </div>

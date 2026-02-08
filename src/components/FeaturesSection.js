@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import Section from "components/Section";
 import SectionHeader from "components/SectionHeader";
 
@@ -50,7 +51,7 @@ function FeaturesSection(props) {
       title: "Bread Loaves",
       description:
         "Fresh-baked bread loaves—white, whole wheat, sourdough, and more. Great for breakfast or dinner.",
-      image: "/products/sravs-bakes-37.jpeg",
+      image: "/products/sravs-bakes-11.jpeg",
     },
     {
       title: "Brownies",
@@ -106,14 +107,16 @@ function FeaturesSection(props) {
               key={index}
             >
               <div className="relative overflow-hidden rounded-xl shadow-lg ring-1 ring-black/5 aspect-square w-full max-w-xs mx-auto mb-4">
-                <img
+                <Image
                   src={feature.image}
                   alt={feature.title}
-                  className="w-full h-full object-cover transition duration-200 group-hover:scale-105"
+                  fill
+                  className="object-cover transition duration-200 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
               </div>
               <h4 className="text-lg font-bold mb-2">{feature.title}</h4>
-              <p className="leading-relaxed text-gray-600">
+              <p className="leading-relaxed text-muted-foreground">
                 {feature.description}
               </p>
             </div>

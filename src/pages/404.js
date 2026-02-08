@@ -20,13 +20,13 @@ function NotFoundPage() {
           <p className="text-primary font-semibold text-sm uppercase tracking-wider mb-2">
             Oops
           </p>
-          <h1 className="text-5xl sm:text-6xl font-bold text-gray-900 mb-3">
+          <h1 className="text-5xl sm:text-6xl font-bold text-foreground mb-3">
             404
           </h1>
-          <p className="text-xl text-gray-700 mb-6">
+          <p className="text-xl text-foreground/90 mb-6">
             This page doesn&apos;t exist. Maybe it was moved or the link is wrong.
           </p>
-          <p className="text-gray-600 mb-10">
+          <p className="text-muted-foreground mb-10">
             No worries—head back to the home page to browse our cakes, cupcakes, and sweet treats.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -40,7 +40,7 @@ function NotFoundPage() {
             <button
               type="button"
               onClick={() => typeof window !== "undefined" && window.history.back()}
-              className="inline-flex items-center justify-center gap-2 rounded-md border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-700 shadow-sm hover:bg-gray-50 transition-colors"
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-input bg-background px-6 py-3 text-sm font-semibold text-foreground shadow-sm hover:bg-muted transition-colors"
             >
               <ArrowLeftIcon className="w-5 h-5" />
               Go back

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 import Section from "components/Section";
 import SectionHeader from "components/SectionHeader";
 import ImageLightbox from "components/ImageLightbox";
@@ -34,10 +35,12 @@ function Gallery(props) {
               onClick={() => setLightbox({ src: img.src, alt: img.alt })}
               className="relative aspect-square rounded-xl overflow-hidden bg-muted group shadow-lg ring-1 ring-black/5 text-left cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
             >
-              <img
+              <Image
                 src={img.src}
                 alt={img.alt}
-                className="w-full h-full object-cover transition duration-300 group-hover:scale-105"
+                fill
+                className="object-cover transition duration-300 group-hover:scale-105"
+                sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
               />
             </button>
           ))}

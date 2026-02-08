@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import {
   CubeTransparentIcon,
   HeartIcon,
@@ -55,12 +56,24 @@ function HeroSection2(props) {
             className="lg:w-1/2"
           />
         </div>
-        <div className="flex space-x-2">
-          <div>
-            <img src={props.leftImage} alt={props.leftImageAlt ?? "Bakery"} className="rounded-lg object-cover w-full h-full" />
+        <div className="flex gap-2">
+          <div className="relative aspect-[4/3] min-h-[200px] flex-1 rounded-lg overflow-hidden">
+            <Image
+              src={props.leftImage}
+              alt={props.leftImageAlt ?? "Bakery"}
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 50vw, 33vw"
+            />
           </div>
-          <div>
-            <img src={props.rightImage} alt={props.rightImageAlt ?? "Baked goods"} className="rounded-lg object-cover w-full h-full" />
+          <div className="relative aspect-[4/3] min-h-[200px] flex-1 rounded-lg overflow-hidden">
+            <Image
+              src={props.rightImage}
+              alt={props.rightImageAlt ?? "Baked goods"}
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 50vw, 33vw"
+            />
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
@@ -75,7 +88,7 @@ function HeroSection2(props) {
                 />
                 <span>{item.title}</span>
               </h3>
-              <p className="leading-relaxed text-gray-600">
+              <p className="leading-relaxed text-muted-foreground">
                 {item.description}
               </p>
             </div>

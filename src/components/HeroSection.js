@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { ArrowRightIcon, ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import Section from "components/Section";
 import SectionHeader from "components/SectionHeader";
@@ -75,10 +76,13 @@ function HeroSection(props) {
                     zIndex: i === index ? 1 : 0,
                   }}
                 >
-                  <img
-                    className="w-full h-full object-cover"
+                  <Image
                     src={slide.src}
                     alt={slide.alt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    priority={i === 0}
                   />
                 </div>
               ))}

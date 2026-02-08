@@ -30,7 +30,7 @@ function StatsSection(props) {
           {stats.map((stat, index) => (
             <dl className="space-y-1 p-5" key={index}>
               <dt className="text-4xl font-extrabold">{stat.count}</dt>
-              <dd className="text-sm uppercase tracking-wide font-semibold text-gray-600">
+              <dd className="text-sm uppercase tracking-wide font-semibold text-muted-foreground">
                 {stat.title}
               </dd>
             </dl>

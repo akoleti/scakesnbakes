@@ -19,8 +19,8 @@ function TermsOfServicePage() {
             strapline="Legal"
             className="text-center mb-12"
           />
-          <div className="prose prose-gray max-w-none text-gray-700 space-y-6">
-            <p className="text-sm text-gray-500">Last updated: February 2025</p>
+          <div className="prose prose-neutral max-w-none prose-headings:text-foreground prose-p:text-muted-foreground space-y-6">
+            <p className="text-sm text-muted-foreground">Last updated: February 2025</p>
 
             <h2 className="text-xl font-semibold text-foreground mt-8">1. Agreement</h2>
             <p>
