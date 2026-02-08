@@ -105,7 +105,7 @@ export default async function handler(req, res) {
     return res.status(500).json({
       status: "error",
       code: "CONFIG",
-      message: "Configure either SendFox (SENDFOX_ACCESS_TOKEN) or email (CONTACT_EMAIL + SMTP_* in .env).",
+      message: "Contact form is not configured. Set CONTACT_EMAIL and SMTP_* (or SENDFOX_ACCESS_TOKEN) in your hosting environment (e.g. Vercel Environment Variables).",
     });
   }
 

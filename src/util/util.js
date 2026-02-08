@@ -1,21 +1,40 @@
 import { useRef, useEffect } from "react";
 
+// Base URL for API: same origin in browser (avoids production proxy/CDN issues), empty for SSR
+function getApiBase() {
+  if (typeof window === "undefined") return "";
+  return window.location.origin;
+}
+
 // Make an API request to `/api/{path}`
 export function apiRequest(path, method = "GET", data) {
-  return fetch(`/api/${path}`, {
+  const url = `${getApiBase()}/api/${path}`;
+  return fetch(url, {
     method: method,
     headers: {
       "Content-Type": "application/json",
     },
     body: data ? JSON.stringify(data) : undefined,
   })
-    .then((response) => response.json())
-    .then((response) => {
-      if (response.status === "error") {
-        throw new CustomError(response.code, response.message);
-      } else {
-        return response.data;
+    .then(async (response) => {
+      const text = await response.text();
+      let json;
+      try {
+        json = text ? JSON.parse(text) : {};
+      } catch {
+        throw new CustomError(
+          "INVALID_RESPONSE",
+          response.ok ? "Invalid response from server." : "Something went wrong. Please try again or contact us directly."
+        );
       }
+      if (!response.ok) {
+        const message = json.message || json.error || response.statusText || "Something went wrong.";
+        throw new CustomError(json.code || "REQUEST_FAILED", message);
+      }
+      if (json.status === "error") {
+        throw new CustomError(json.code, json.message);
+      }
+      return json.data;
     });
 }
 
