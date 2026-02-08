@@ -1,6 +1,6 @@
 import React from "react";
 import Meta from "components/Meta";
-import ContactSection from "components/ContactSection";
+import OrderSection from "components/OrderSection";
 
 function OrderPage(props) {
   return (
@@ -9,9 +9,9 @@ function OrderPage(props) {
         title="Order Now"
         description="Place an order for cakes, cupcakes, cake pops, and more from Sravs Signature Bakes."
       />
-      <ContactSection
+      <OrderSection
         title="Place an order"
-        subtitle="Tell us what you’d like—cakes, cupcakes, cake pops, themed orders, or a custom cake. Include item, quantity, date needed, and any dietary needs. We’ll get back to you to confirm details and pricing."
+        subtitle="Tell us what you'd like and when you need it. We'll confirm availability and pricing."
         strapline="Order now"
         size="md"
         bgColor="bg-white"

@@ -1,13 +1,48 @@
 import React from "react";
+import {
+  HeartIcon,
+  FireIcon,
+  CheckCircleIcon,
+} from "@heroicons/react/24/solid";
 import Meta from "components/Meta";
 import HeroSection2 from "components/HeroSection2";
 import StatsSection from "components/StatsSection";
 import Products from "components/Products";
 
+const ABOUT_ITEMS = [
+  {
+    title: "Made with care",
+    description:
+      "Every cake, cupcake, and treat is baked with attention to detail. We take pride in making your celebrations and everyday moments a little sweeter.",
+    icon: HeartIcon,
+    iconColor: "text-red-500",
+  },
+  {
+    title: "Fresh ingredients",
+    description:
+      "We use quality ingredients and bake to order so you get the freshest cakes, themed treats, tiramisu, dessert cups, and custom creations.",
+    icon: FireIcon,
+    iconColor: "text-amber-500",
+  },
+  {
+    title: "Made to order",
+    description:
+      "From custom cakes and themed birthday cakes to cupcake bouquets and party spreads—tell us what you need and we'll make it special for you.",
+    icon: CheckCircleIcon,
+    iconColor: "text-green-600",
+  },
+];
+
+const ABOUT_STATS = [
+  { title: "Orders fulfilled", count: "500+" },
+  { title: "Treats baked", count: "5k+" },
+  { title: "Happy customers", count: "100%" },
+];
+
 function AboutPage(props) {
   return (
     <>
-      <Meta title="About" description="Learn about Sravs Signature Bakes—cakes, cupcakes, bread, brownies, cookies, and custom orders." />
+      <Meta title="About" description="Learn about Sravs Signature Bakes—cakes, cupcakes, cake pops, themed orders, custom cakes, and more. Fresh-baked with care." />
       <HeroSection2
         title={
           <>
@@ -15,29 +50,32 @@ function AboutPage(props) {
             <span className="font-serif font-light">Signature Bakes</span>
           </>
         }
-        subtitle="A small bakery dedicated to cakes, cupcakes, bread loaves, brownies, cookies, birthday party orders, custom cakes, and cupcake bouquets—all made fresh with care."
-        strapline=""
+        subtitle="A small bakery dedicated to cakes, cupcakes, cake pops, themed birthday cakes, tiramisu, dessert cups, cookies, custom cakes, and cupcake bouquets—all made fresh with care."
+        strapline="Our story"
         size="md"
         bgColor="bg-white"
         bgImage=""
         bgImageOpacity={1}
         textColor=""
-        leftImage="https://images.unsplash.com/photo-1578985545062-69986b85fde8?crop=entropy&fit=crop&h=800&w=1280"
-        rightImage="https://images.unsplash.com/photo-1488477181946-6428a0291777?crop=entropy&fit=crop&h=800&q=80&w=600"
+        leftImage="/products/sravs-bakes-19.jpeg"
+        rightImage="/products/sravs-bakes-01.jpeg"
+        items={ABOUT_ITEMS}
+        showTopIcon={false}
       />
       <StatsSection
         title="Baked fresh for you"
-        subtitle="We focus on quality ingredients, careful baking, and making every order special—whether it’s a single loaf of bread or a full party spread."
+        subtitle="We focus on quality ingredients, careful baking, and making every order special—whether it’s a single treat or a full party spread."
         strapline="Our promise"
         size="md"
         bgColor="bg-white"
         bgImage=""
         bgImageOpacity={1}
         textColor=""
+        stats={ABOUT_STATS}
       />
       <Products
         title="What we offer"
-        subtitle="Cakes, cupcakes, bread loaves, brownies, cookies, birthday party orders, custom cakes, and cupcake bouquets. Browse and order what you love."
+        subtitle="Cakes, cupcakes, cake pops, themed birthday cakes, tiramisu, dessert cups, cookies, custom cakes, cupcake bouquets, and more. Browse and order what you love."
         strapline=""
         size="md"
         bgColor="bg-white"

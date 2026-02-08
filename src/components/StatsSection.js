@@ -2,21 +2,14 @@ import React from "react";
 import Section from "components/Section";
 import SectionHeader from "components/SectionHeader";
 
+const DEFAULT_STATS = [
+  { title: "Projects", count: "3,500+" },
+  { title: "Clients", count: "260+" },
+  { title: "Earnings", count: "175k+" },
+];
+
 function StatsSection(props) {
-  const stats = [
-    {
-      title: "Projects",
-      count: "3,500+",
-    },
-    {
-      title: "Clients",
-      count: "260+",
-    },
-    {
-      title: "Earnings",
-      count: "175k+",
-    },
-  ];
+  const stats = props.stats ?? DEFAULT_STATS;
 
   return (
     <Section

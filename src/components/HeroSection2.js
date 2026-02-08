@@ -7,30 +7,33 @@ import {
 import Section from "components/Section";
 import SectionHeader from "components/SectionHeader";
 
+const DEFAULT_ITEMS = [
+  {
+    title: "Passion",
+    description:
+      "We are passionate with what we do and love crafting products that can make your life easier and help you succeed. We pay attention to small details and always aiming for the best.",
+    icon: HeartIcon,
+    iconColor: "text-red-500",
+  },
+  {
+    title: "Commitment",
+    description:
+      "We are committed to our work and stand by our projects. Our aim is to improve them in every update and offer the most full-featured packages with the smallest possible footprint.",
+    icon: ArrowDownIcon,
+    iconColor: "text-blue-500",
+  },
+  {
+    title: "Less is more",
+    description:
+      "We believe that design should be invisible and enhance the user experience, not get in the way. This gives room for your content to breath and attracts your users' attention.",
+    icon: CubeTransparentIcon,
+    iconColor: "text-pink-500",
+  },
+];
+
 function HeroSection2(props) {
-  const items = [
-    {
-      title: "Passion",
-      description:
-        "We are passionate with what we do and love crafting products that can make your life easier and help you succeed. We pay attention to small details and always aiming for the best.",
-      icon: HeartIcon,
-      iconColor: "text-red-500",
-    },
-    {
-      title: "Commitment",
-      description:
-        "We are committed to our work and stand by our projects. Our aim is to improve them in every update and offer the most full-featured packages with the smallest possible footprint.",
-      icon: ArrowDownIcon,
-      iconColor: "text-blue-500",
-    },
-    {
-      title: "Less is more",
-      description:
-        "We believe that design should be invisible and enhance the user experience, not get in the way. This gives room for your content to breath and attracts your users’ attention.",
-      icon: CubeTransparentIcon,
-      iconColor: "text-pink-500",
-    },
-  ];
+  const items = props.items ?? DEFAULT_ITEMS;
+  const showTopIcon = props.showTopIcon !== false;
 
   return (
     <Section
@@ -42,7 +45,9 @@ function HeroSection2(props) {
     >
       <div className="space-y-16 container">
         <div>
-          <CubeTransparentIcon className="text-blue-600 mb-5 inline-block w-16 h-16" />
+          {showTopIcon && (
+            <CubeTransparentIcon className="text-blue-600 mb-5 inline-block w-16 h-16" />
+          )}
           <SectionHeader
             title={props.title}
             subtitle={props.subtitle}
@@ -52,10 +57,10 @@ function HeroSection2(props) {
         </div>
         <div className="flex space-x-2">
           <div>
-            <img src={props.leftImage} alt="" className="rounded-lg" />
+            <img src={props.leftImage} alt={props.leftImageAlt ?? "Bakery"} className="rounded-lg object-cover w-full h-full" />
           </div>
           <div>
-            <img src={props.rightImage} alt="" className="rounded-lg" />
+            <img src={props.rightImage} alt={props.rightImageAlt ?? "Baked goods"} className="rounded-lg object-cover w-full h-full" />
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
