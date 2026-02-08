@@ -1,6 +1,7 @@
 import React from "react";
 import Meta from "components/Meta";
 import HeroSection from "components/HeroSection";
+import ValentinePromo from "components/ValentinePromo";
 import FeaturesSection from "components/FeaturesSection";
 import StatsSection2 from "components/StatsSection2";
 import TestimonialsSection from "components/TestimonialsSection";
@@ -9,6 +10,7 @@ function IndexPage(props) {
   return (
     <>
       <Meta />
+      <ValentinePromo />
       <HeroSection
         title="Cakes, Cupcakes & Sweet Treats Made with Love"
         subtitle="Custom cakes, themed birthday cakes, cupcakes, cake pops, tiramisu, dessert cups, cookies, and more—all made to order. Order your party desserts, cupcake bouquets, or a custom cake today."
