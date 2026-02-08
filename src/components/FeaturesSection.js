@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Section from "components/Section";
 import SectionHeader from "components/SectionHeader";
+import ImageLightbox from "components/ImageLightbox";
 
 function FeaturesSection(props) {
+  const [lightbox, setLightbox] = useState({ src: null, alt: null, orderHref: "/order" });
   const features = [
     {
       title: "Cakes",
@@ -101,27 +103,41 @@ function FeaturesSection(props) {
           className="text-center"
         />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-          {features.map((feature, index) => (
-            <div
-              className="group text-center"
-              key={index}
-            >
-              <div className="relative overflow-hidden rounded-xl shadow-lg ring-1 ring-black/5 aspect-square w-full max-w-xs mx-auto mb-4">
-                <Image
-                  src={feature.image}
-                  alt={feature.title}
-                  fill
-                  className="object-cover transition duration-200 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
+          {features.map((feature, index) => {
+            const orderHref = `/order?product=${encodeURIComponent(feature.title)}&details=${encodeURIComponent(feature.description.slice(0, 80) + (feature.description.length > 80 ? "…" : ""))}`;
+            return (
+              <div
+                className="group text-center"
+                key={index}
+              >
+                <button
+                  type="button"
+                  onClick={() => setLightbox({ src: feature.image, alt: feature.title, orderHref })}
+                  className="relative overflow-hidden rounded-xl shadow-lg ring-1 ring-black/5 aspect-square w-full max-w-xs mx-auto mb-4 block cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 text-left"
+                  aria-label={`View ${feature.title} and order`}
+                >
+                  <Image
+                    src={feature.image}
+                    alt={feature.title}
+                    fill
+                    className="object-cover transition duration-200 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
+                </button>
+                <h4 className="text-lg font-bold mb-2">{feature.title}</h4>
+                <p className="leading-relaxed text-muted-foreground">
+                  {feature.description}
+                </p>
               </div>
-              <h4 className="text-lg font-bold mb-2">{feature.title}</h4>
-              <p className="leading-relaxed text-muted-foreground">
-                {feature.description}
-              </p>
-            </div>
-          ))}
+            );
+          })}
         </div>
+        <ImageLightbox
+          src={lightbox.src}
+          alt={lightbox.alt}
+          orderHref={lightbox.orderHref}
+          onClose={() => setLightbox({ src: null, alt: null, orderHref: "/order" })}
+        />
       </div>
     </Section>
   );
