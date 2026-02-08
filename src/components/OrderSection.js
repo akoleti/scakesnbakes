@@ -31,6 +31,9 @@ const PRODUCT_OPTIONS = [
 const PRODUCT_PRICE = {
   "Cakes": "$20 per lb",
   "Cupcakes": "$12 per 12, or $2 each",
+  "Cake Pops": "$2 each",
+  "Cookies": "$2 each",
+  "Themed Birthday Cakes": "We'll quote based on size & design",
   "Brownies": "$15 for 7 pieces",
   "Bread Loaves": "$20 (2 lb loaf)",
   "Cupcake Bouquets": "$25 (7 count)",
@@ -110,7 +113,7 @@ function OrderSection(props) {
               if (imageInputRef.current) imageInputRef.current.value = "";
               setFormAlert({
                 type: "success",
-                message: "Your order request has been sent! We'll get back to you to confirm details and pricing.",
+                message: "Thank you! Your order request has been received. One of our team members will call you shortly to confirm your order.",
               });
             })
             .catch((err) => {
@@ -133,7 +136,7 @@ function OrderSection(props) {
         if (imageInputRef.current) imageInputRef.current.value = "";
         setFormAlert({
           type: "success",
-          message: "Your order request has been sent! We'll get back to you to confirm details and pricing.",
+          message: "Thank you! Your order request has been received. One of our team members will call you shortly to confirm your order.",
         });
       })
       .catch((error) => {

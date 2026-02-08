@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Section from "components/Section";
 import SectionHeader from "components/SectionHeader";
+import ImageLightbox from "components/ImageLightbox";
 
 const GALLERY_IMAGES = Array.from({ length: 37 }, (_, i) => ({
   src: `/products/sravs-bakes-${String(i + 1).padStart(2, "0")}.jpeg`,
@@ -8,6 +9,8 @@ const GALLERY_IMAGES = Array.from({ length: 37 }, (_, i) => ({
 }));
 
 function Gallery(props) {
+  const [lightbox, setLightbox] = useState({ src: null, alt: null });
+
   return (
     <Section
       size={props.size}
@@ -25,18 +28,25 @@ function Gallery(props) {
         />
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
           {GALLERY_IMAGES.map((img, index) => (
-            <div
+            <button
               key={index}
-              className="relative aspect-square rounded-xl overflow-hidden bg-muted group shadow-lg ring-1 ring-black/5"
+              type="button"
+              onClick={() => setLightbox({ src: img.src, alt: img.alt })}
+              className="relative aspect-square rounded-xl overflow-hidden bg-muted group shadow-lg ring-1 ring-black/5 text-left cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
             >
               <img
                 src={img.src}
                 alt={img.alt}
                 className="w-full h-full object-cover transition duration-300 group-hover:scale-105"
               />
-            </div>
+            </button>
           ))}
         </div>
+        <ImageLightbox
+          src={lightbox.src}
+          alt={lightbox.alt}
+          onClose={() => setLightbox({ src: null, alt: null })}
+        />
       </div>
     </Section>
   );

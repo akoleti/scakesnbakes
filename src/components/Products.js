@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Section from "components/Section";
 import SectionHeader from "components/SectionHeader";
+import ImageLightbox from "components/ImageLightbox";
 
 function Products(props) {
+  const [lightbox, setLightbox] = useState({ src: null, alt: null, orderHref: "/order" });
   const products = [
     {
       avatar: "/products/sravs-bakes-33.jpeg",
@@ -96,7 +98,30 @@ function Products(props) {
               passHref
             >
               <a className="text-center block group">
-                <span className="block relative overflow-hidden rounded-xl shadow-lg ring-1 ring-black/5 active:opacity-75 mb-3">
+                <span
+                  className="block relative overflow-hidden rounded-xl shadow-lg ring-1 ring-black/5 active:opacity-75 mb-3 cursor-zoom-in"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setLightbox({
+                    src: product.avatar,
+                    alt: product.name,
+                    orderHref: `/order?product=${encodeURIComponent(product.name)}&details=${encodeURIComponent(product.role)}`,
+                  });
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setLightbox({
+                        src: product.avatar,
+                        alt: product.name,
+                        orderHref: `/order?product=${encodeURIComponent(product.name)}&details=${encodeURIComponent(product.role)}`,
+                      });
+                    }
+                  }}
+                >
                   <div className="absolute top-0 right-0 w-16 h-16 -mt-8 -mr-8 transform transition ease-out duration-150 rotate-45 scale-0 group-hover:scale-125 bg-white z-10" />
                   <div className="absolute bottom-0 left-0 w-16 h-16 -mb-8 -ml-8 transform transition ease-out duration-150 rotate-45 scale-0 group-hover:scale-125 bg-white z-10" />
                   <img
@@ -111,6 +136,12 @@ function Products(props) {
             </Link>
           ))}
         </div>
+        <ImageLightbox
+          src={lightbox.src}
+          alt={lightbox.alt}
+          orderHref={lightbox.orderHref}
+          onClose={() => setLightbox({ src: null, alt: null, orderHref: "/order" })}
+        />
       </div>
     </Section>
   );
