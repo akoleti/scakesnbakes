@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
 import { useForm } from "react-hook-form";
@@ -28,20 +28,50 @@ const PRODUCT_OPTIONS = [
   { value: "Multiple / assortment", label: "Multiple / assortment" },
 ];
 
+const PRODUCT_PRICE = {
+  "Cakes": "$20 per lb",
+  "Cupcakes": "$12 per 12, or $2 each",
+  "Brownies": "$15 for 7 pieces",
+  "Bread Loaves": "$20 (2 lb loaf)",
+  "Cupcake Bouquets": "$25 (7 count)",
+  "Dessert Cups & Parfaits": "$2 each",
+};
+
 function OrderSection(props) {
+  const { defaultProduct = "", defaultDetails = "" } = props;
   const [pending, setPending] = useState(false);
   const [formAlert, setFormAlert] = useState(null);
+  const imageInputRef = useRef(null);
   const {
     handleSubmit,
     register,
+    watch,
     formState: { errors },
     reset,
-  } = useForm();
+    setValue,
+  } = useForm({
+    defaultValues: {
+      productType: defaultProduct,
+      message: defaultDetails ? `Interested in: ${defaultDetails}. ` : "",
+    },
+  });
+
+  const selectedProduct = watch("productType");
+  const isCustomCake = selectedProduct === "Custom Cakes";
+  const selectedPrice = selectedProduct ? (PRODUCT_PRICE[selectedProduct] || null) : null;
+
+  useEffect(() => {
+    if (defaultProduct || defaultDetails) {
+      setValue("productType", defaultProduct);
+      setValue("message", defaultDetails ? `Interested in: ${defaultDetails}. ` : "");
+    }
+  }, [defaultProduct, defaultDetails, setValue]);
 
   const onSubmit = (data) => {
-    const { name, email, phone, productType, dateNeeded, dietary, message } = data;
+    const { name, email, phone, productType, dateNeeded, dietary, message, quantityOrSize } = data;
     const orderDetails = [
       productType && `Product: ${productType}`,
+      quantityOrSize && `Quantity / size: ${quantityOrSize}`,
       dateNeeded && `Date needed: ${dateNeeded}`,
       dietary && `Dietary requirements: ${dietary}`,
       message && `Details: ${message}`,
@@ -54,12 +84,53 @@ function OrderSection(props) {
       phone: phone || "",
       subject: "Order",
       message: orderDetails || "No details provided.",
+      product_type: productType || "",
+      quantity_or_size: quantityOrSize || "",
+      date_needed: dateNeeded || "",
+      dietary: dietary || "",
     };
+    const file = imageInputRef.current?.files?.[0];
+    if (file && file.size > 0) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const dataUrl = reader.result;
+          const base64 = typeof dataUrl === "string" && dataUrl.startsWith("data:")
+            ? dataUrl.replace(/^data:[^;]+;base64,/, "")
+            : "";
+          if (base64) {
+            payload.imageBase64 = base64;
+            payload.imageFilename = file.name || "reference-image";
+          }
+          setPending(true);
+          contact
+            .submit(payload)
+            .then(() => {
+              reset();
+              if (imageInputRef.current) imageInputRef.current.value = "";
+              setFormAlert({
+                type: "success",
+                message: "Your order request has been sent! We'll get back to you to confirm details and pricing.",
+              });
+            })
+            .catch((err) => {
+              setFormAlert({ type: "error", message: err.message });
+            })
+            .finally(() => {
+              setPending(false);
+              resolve();
+            });
+        };
+        reader.onerror = () => reject(new Error("Could not read image"));
+        reader.readAsDataURL(file);
+      });
+    }
     setPending(true);
     contact
       .submit(payload)
       .then(() => {
         reset();
+        if (imageInputRef.current) imageInputRef.current.value = "";
         setFormAlert({
           type: "success",
           message: "Your order request has been sent! We'll get back to you to confirm details and pricing.",
@@ -95,6 +166,13 @@ function OrderSection(props) {
             strapline={props.strapline || "Order now"}
             className="text-center"
           />
+          {defaultProduct && (
+            <p className="text-center">
+              <span className="inline-block px-3 py-1.5 rounded-full bg-primary/10 text-primary font-medium text-sm">
+                Ordering: {defaultProduct}
+              </span>
+            </p>
+          )}
           <p className="text-center text-gray-600 max-w-xl mx-auto">
             Browse our <Link href="/products" legacyBehavior passHref><a className="text-primary font-medium hover:underline">products</a></Link> or{" "}
             <Link href="/gallery" legacyBehavior passHref><a className="text-primary font-medium hover:underline">gallery</a></Link> for ideas.
@@ -148,7 +226,39 @@ function OrderSection(props) {
                     </option>
                   ))}
                 </select>
+                {selectedProduct && (
+                  <p className="mt-2 text-sm text-gray-600">
+                    {selectedPrice ? (
+                      <span><strong>Price:</strong> {selectedPrice}</span>
+                    ) : (
+                      <span>We&apos;ll quote based on your needs.</span>
+                    )}
+                  </p>
+                )}
               </div>
+              <TextField
+                type="text"
+                label="Quantity or size"
+                id="quantityOrSize"
+                placeholder="e.g. 2 lb, 24 cupcakes, 1 loaf, 7-count bouquet"
+                error={errors.quantityOrSize}
+                {...register("quantityOrSize")}
+              />
+              {isCustomCake && (
+                <div className="w-full">
+                  <label htmlFor="referenceImage" className="mb-1.5 block font-medium text-foreground">
+                    Reference image (optional)
+                  </label>
+                  <input
+                    ref={imageInputRef}
+                    type="file"
+                    id="referenceImage"
+                    accept="image/*"
+                    className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm file:mr-3 file:rounded-md file:border-0 file:bg-primary file:px-4 file:py-2 file:text-sm file:font-medium file:text-primary-foreground file:cursor-pointer"
+                  />
+                  <p className="mt-1 text-xs text-gray-500">Upload a photo of the design or cake you&apos;d like.</p>
+                </div>
+              )}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <TextField
                   type="text"

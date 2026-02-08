@@ -1,8 +1,13 @@
 import React from "react";
+import { useRouter } from "next/router";
 import Meta from "components/Meta";
 import OrderSection from "components/OrderSection";
 
 function OrderPage(props) {
+  const router = useRouter();
+  const product = typeof router.query.product === "string" ? router.query.product : "";
+  const details = typeof router.query.details === "string" ? router.query.details : "";
+
   return (
     <>
       <Meta
@@ -18,6 +23,8 @@ function OrderPage(props) {
         bgImage=""
         bgImageOpacity={1}
         textColor=""
+        defaultProduct={product}
+        defaultDetails={details}
       />
     </>
   );

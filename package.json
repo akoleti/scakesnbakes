@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "nodemailer": "^6.9.16",
+    "pg": "^8.13.0",
     "@heroicons/react": "^2.1.5",
     "@radix-ui/react-avatar": "^1.1.2",
     "@radix-ui/react-label": "^2.1.1",

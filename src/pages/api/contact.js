@@ -13,6 +13,10 @@ const SENDFOX_LIST_IDS = process.env.SENDFOX_LIST_ID
   ? [parseInt(process.env.SENDFOX_LIST_ID, 10)].filter((n) => !Number.isNaN(n))
   : [];
 
+export const config = {
+  api: { bodyParser: { sizeLimit: "4mb" } },
+};
+
 function getTransporter() {
   if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) {
     return null;
@@ -63,12 +67,27 @@ export default async function handler(req, res) {
     return res.status(405).json({ status: "error", code: "METHOD_NOT_ALLOWED", message: "Method not allowed" });
   }
 
-  const { name = "", email = "", message = "", phone = "", subject: enquiryType = "" } = req.body || {};
+  const {
+    name = "",
+    email = "",
+    message = "",
+    phone = "",
+    subject: enquiryType = "",
+    imageBase64 = "",
+    imageFilename = "",
+    product_type: productType = "",
+    quantity_or_size: quantityOrSize = "",
+    date_needed: dateNeeded = "",
+    dietary = "",
+  } = req.body || {};
   const trimmedName = String(name).trim();
   const trimmedEmail = String(email).trim();
   const trimmedMessage = String(message).trim();
   const trimmedPhone = String(phone).trim();
   const trimmedSubject = String(enquiryType).trim();
+  const hasImage = Boolean(imageBase64 && typeof imageBase64 === "string" && imageBase64.length > 0);
+  const trimmedImageFilename = String(imageFilename).trim() || "reference-image";
+  const isOrder = trimmedSubject === "Order";
 
   if (!trimmedEmail) {
     return res.status(400).json({
@@ -92,6 +111,26 @@ export default async function handler(req, res) {
 
   const errors = [];
 
+  try {
+    const { saveSubmission } = require("../../lib/db");
+    await saveSubmission({
+      type: isOrder ? "order" : "contact",
+      name: trimmedName,
+      email: trimmedEmail,
+      phone: trimmedPhone,
+      subject: trimmedSubject,
+      message: trimmedMessage,
+      product_type: String(productType || "").trim() || null,
+      quantity_or_size: String(quantityOrSize || "").trim() || null,
+      date_needed: String(dateNeeded || "").trim() || null,
+      dietary: String(dietary || "").trim() || null,
+      image_filename: hasImage ? trimmedImageFilename : null,
+      image_base64: hasImage ? imageBase64 : null,
+    });
+  } catch (dbErr) {
+    console.error("Database save error:", dbErr);
+  }
+
   if (useSendFox) {
     try {
       const namePart = trimmedName.split(/\s+/);
@@ -110,6 +149,20 @@ export default async function handler(req, res) {
     const fromAddress = isResend && unverifiedDomains.test(String(fromCandidate).trim())
       ? "onboarding@resend.dev"
       : fromCandidate;
+    const attachments = [];
+    if (hasImage) {
+      try {
+        const buffer = Buffer.from(imageBase64, "base64");
+        if (buffer.length > 0) {
+          attachments.push({
+            filename: trimmedImageFilename.replace(/[^a-zA-Z0-9.-]/g, "_") + (trimmedImageFilename.includes(".") ? "" : ".jpg"),
+            content: buffer,
+          });
+        }
+      } catch (e) {
+        console.error("Contact form image decode error:", e);
+      }
+    }
     const mailOptions = {
       from: `Sravs Signature Bakes Contact <${fromAddress}>`,
       to: CONTACT_EMAIL,
@@ -117,6 +170,7 @@ export default async function handler(req, res) {
       subject: trimmedSubject
         ? `[${trimmedSubject}] ${trimmedName || "Contact form"} – Sravs Signature Bakes`
         : `New message from ${trimmedName || "Contact form"} – Sravs Signature Bakes`,
+      attachments: attachments.length > 0 ? attachments : undefined,
       text: [
         "Hello,",
         "",
@@ -125,6 +179,7 @@ export default async function handler(req, res) {
         `From: ${trimmedName || "—"} <${trimmedEmail}>`,
         ...(trimmedPhone ? [`Phone: ${trimmedPhone}`, ""] : []),
         ...(trimmedSubject ? [`Enquiry type: ${trimmedSubject}`, ""] : []),
+        ...(hasImage ? ["Attachment: reference image", ""] : []),
         "Message:",
         trimmedMessage || "(No message)",
         "",
@@ -136,6 +191,7 @@ export default async function handler(req, res) {
         <p><strong>From:</strong> ${trimmedName || "—"} &lt;${trimmedEmail}&gt;</p>
         ${trimmedPhone ? `<p><strong>Phone:</strong> ${trimmedPhone}</p>` : ""}
         ${trimmedSubject ? `<p><strong>Enquiry type:</strong> ${trimmedSubject}</p>` : ""}
+        ${hasImage ? "<p><strong>Attachment:</strong> reference image</p>" : ""}
         <p><strong>Message:</strong></p>
         <p>${(trimmedMessage || "(No message)").replace(/\n/g, "<br>")}</p>
         <p>— Sravs Signature Bakes</p>

@@ -89,7 +89,12 @@ function Products(props) {
         />
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-16">
           {products.map((product, index) => (
-            <Link href="/order" key={index} legacyBehavior passHref>
+            <Link
+              href={`/order?product=${encodeURIComponent(product.name)}&details=${encodeURIComponent(product.role)}`}
+              key={index}
+              legacyBehavior
+              passHref
+            >
               <a className="text-center block group">
                 <span className="block relative overflow-hidden rounded-xl shadow-lg ring-1 ring-black/5 active:opacity-75 mb-3">
                   <div className="absolute top-0 right-0 w-16 h-16 -mt-8 -mr-8 transform transition ease-out duration-150 rotate-45 scale-0 group-hover:scale-125 bg-white z-10" />
