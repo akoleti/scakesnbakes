@@ -184,6 +184,29 @@ function OrderSection(props) {
             {formAlert && (
               <div className="mb-6">
                 <FormAlert type={formAlert.type} message={formAlert.message} />
+                {formAlert.type === "error" && (
+                  <p className="mt-3 text-center text-sm text-muted-foreground">
+                    {process.env.NEXT_PUBLIC_CONTACT_EMAIL ? (
+                      <>
+                        You can also email us at{" "}
+                        <a
+                          href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL}`}
+                          className="text-primary font-medium hover:underline"
+                        >
+                          {process.env.NEXT_PUBLIC_CONTACT_EMAIL}
+                        </a>{" "}
+                        to place your order.
+                      </>
+                    ) : (
+                      <>
+                        <Link href="/contact" legacyBehavior passHref>
+                          <a className="text-primary font-medium hover:underline">Contact us</a>
+                        </Link>{" "}
+                        to place your order another way.
+                      </>
+                    )}
+                  </p>
+                )}
               </div>
             )}
 

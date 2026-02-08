@@ -18,13 +18,14 @@ The order and contact forms call `/api/contact`. That API needs environment vari
 | `SMTP_SECURE`   | `true`                   | Use `true` for port 465        |
 | `SMTP_USER`     | `resend`                 |                                |
 | `SMTP_PASS`     | your Resend API key      | From [resend.com](https://resend.com) |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | `koletiamar@gmail.com` | Optional – shown if form fails so users can email you |
 
 4. (Optional) To save submissions to Neon in production, add:
    - `DATABASE_URL` or `POSTGRES_URL` — same connection string you use in `.env.local`
 
 5. Click **Save**.
 
-### 2. Redeploy
+### 2. Redeploy (required after changing env vars)
 
 After saving env vars, redeploy so they take effect:
 
