@@ -1,15 +1,16 @@
 import React from "react";
+import { cn } from "@/lib/utils";
 
-function FormAlert(props) {
+function FormAlert({ type, message }) {
   return (
     <div
-      className={
-        "text-center p-4 rounded" +
-        (props.type === "error" ? " text-red-600 bg-red-50" : "") +
-        (props.type === "success" ? " text-green-600 bg-green-50" : "")
-      }
+      className={cn(
+        "text-center rounded-md border p-4 text-sm",
+        type === "error" && "border-destructive/50 bg-destructive/10 text-destructive",
+        type === "success" && "border-primary/30 bg-primary/10 text-primary"
+      )}
     >
-      {props.message}
+      {message}
     </div>
   );
 }

@@ -9,7 +9,7 @@ function Meta(props) {
   // Meta values that are the same across all pages
   const globalMeta = {
     // Site name
-    siteName: "My App",
+    siteName: "Sravs Signature Bakes",
     // Your production domain (example: https://myapp.com)
     domain: "",
     // Your Twitter handle (example: @divjoy)
@@ -19,9 +19,9 @@ function Meta(props) {
   // Default meta values for current page (override with props)
   const defaultPageMeta = {
     // Page title
-    title: "My App",
+    title: "Sravs Signature Bakes",
     // Page description
-    description: "My app description",
+    description: "Cakes, cupcakes, bread loaves, brownies, cookies, birthday party orders, custom cakes, and cupcake bouquets—baked fresh for you.",
     // Social share image (create this file in /public/images/)
     image: "/images/social.png",
     // Page type (see https://ogp.me/#types)

@@ -3,16 +3,67 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --radius: 0.625rem;
+    /* Sravs Signature Bakes palette: dark brown, pinks, blush, gold */
+    --background: 0 0% 100%;
+    --foreground: 0 28% 16%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 28% 16%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 28% 16%;
+    --primary: 338 55% 54%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 65% 91%;
+    --secondary-foreground: 0 28% 16%;
+    --muted: 0 65% 97%;
+    --muted-foreground: 0 15% 40%;
+    --accent: 334 45% 80%;
+    --accent-foreground: 0 28% 16%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 334 30% 90%;
+    --input: 334 30% 90%;
+    --ring: 338 55% 54%;
+    --gold: 38 38% 55%;
+    --gold-light: 38 60% 73%;
+    --chart-1: 338 55% 54%;
+    --chart-2: 334 45% 80%;
+    --chart-3: 342 72% 79%;
+    --chart-4: 38 38% 55%;
+    --chart-5: 0 65% 91%;
+  }
+  .dark {
+    --background: 0 28% 10%;
+    --foreground: 0 0% 98%;
+    --card: 0 28% 12%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 28% 12%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 338 55% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 334 30% 25%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 334 20% 22%;
+    --muted-foreground: 334 15% 70%;
+    --accent: 334 45% 35%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 334 20% 25%;
+    --input: 334 20% 25%;
+    --ring: 338 55% 60%;
+    --chart-1: 338 55% 60%;
+    --chart-2: 334 45% 80%;
+    --chart-3: 342 72% 79%;
+    --chart-4: 38 38% 55%;
+    --chart-5: 0 65% 91%;
+  }
   #__next {
-    /* Full height of screen and flex so that we can push footer */
-    /* to the bottom even if content is shorter than screen */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
   }
-
-  /* Prevent child elements from shrinking when content */
-  /* is taller than the screen (quirk of having flex parent) */
   #__next > * {
     flex-shrink: 0;
   }

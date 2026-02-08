@@ -1,73 +1,83 @@
 import React from "react";
+import Link from "next/link";
+import { Button as ShadcnButton, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
-const Button = React.forwardRef((props, ref) => {
-  const {
-    size = "md",
-    variant = "primary",
-    type = "button",
-    children,
-    onClick,
-    className,
-    disabled = false,
-    href,
-    target,
-    isBlock = false,
-    startIcon,
-    endIcon,
-    component,
-    ...buttonProps
-  } = props;
+const variantMap = {
+  primary: "default",
+  secondary: "secondary",
+  simple: "outline",
+  light: "secondary",
+  dark: "default",
+};
 
-  // Element to render
-  const Element = component ? component : props.href ? "a" : "button";
+const sizeMap = {
+  sm: "sm",
+  md: "default",
+  lg: "lg",
+  xl: "xl",
+};
 
-  // Tailwind classes
-  const classes = {
-    base: "inline-flex justify-center items-center border font-semibold focus:outline-none rounded focus:ring disabled:opacity-50",
-    link: "whitespace-nowrap",
-    block: "block w-full",
-    size: {
-      sm: "px-3 py-2 leading-5 text-sm space-x-2",
-      md: "px-3 py-2 leading-6 space-x-3",
-      lg: "px-4 py-3 leading-6 space-x-3",
-      xl: "px-6 py-4 leading-6 space-x-3",
+const Button = React.forwardRef(
+  (
+    {
+      size = "md",
+      variant = "primary",
+      type = "button",
+      children,
+      className,
+      disabled = false,
+      href,
+      target,
+      isBlock = false,
+      startIcon,
+      endIcon,
+      ...props
     },
-    variant: {
-      primary:
-        "border-blue-700 bg-blue-700 text-white hover:text-white hover:bg-blue-800 hover:border-blue-800 focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-700 active:border-blue-700",
-      secondary:
-        "border-blue-200 bg-blue-200 text-blue-700 hover:text-blue-700 hover:bg-blue-300 hover:border-blue-300 focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-200 active:border-blue-200",
-      simple:
-        "border-gray-300 bg-white text-gray-800 shadow-sm hover:text-gray-800 hover:bg-gray-100 hover:border-gray-300 hover:shadow focus:ring-gray-500 focus:ring-opacity-25 active:bg-white active:border-white",
-      light:
-        "border-gray-200 bg-gray-200 text-gray-700 hover:text-gray-700 hover:bg-gray-300 hover:border-gray-300 focus:ring-gray-500 focus:ring-opacity-25 active:bg-gray-200 active:border-gray-200",
-      dark: "border-gray-700 bg-gray-700 text-white hover:text-white hover:bg-gray-800 hover:border-gray-800 focus:ring-gray-500 focus:ring-opacity-25 active:bg-gray-700 active:border-gray-700",
-    },
-  };
-
-  return (
-    <Element
-      className={
-        `${classes.base} ${classes.size[size]} ${classes.variant[variant]}` +
-        (Element === "a" ? ` ${classes.link}` : "") +
-        (isBlock ? ` ${classes.block}` : "") +
-        (className ? ` ${className}` : "")
-      }
-      href={href}
-      target={target}
-      type={type}
-      onClick={onClick}
-      disabled={disabled}
-      {...buttonProps}
-      ref={ref}
-    >
-      {startIcon && <span>{startIcon}</span>}
-
-      {children && <span>{props.children}</span>}
-
-      {endIcon && <span>{endIcon}</span>}
-    </Element>
-  );
-});
+    ref
+  ) => {
+    const shadcnVariant = variantMap[variant] || "default";
+    const shadcnSize = sizeMap[size] || "default";
+    const content = (
+      <>
+        {startIcon && <span className="[&_svg]:size-5">{startIcon}</span>}
+        {children && <span>{children}</span>}
+        {endIcon && <span className="[&_svg]:size-5">{endIcon}</span>}
+      </>
+    );
+    const baseClass = cn(
+      buttonVariants({ variant: shadcnVariant, size: shadcnSize }),
+      isBlock && "w-full",
+      className
+    );
+    if (href) {
+      return (
+        <Link href={href} legacyBehavior passHref>
+          <a
+            className={baseClass}
+            target={target}
+            ref={ref}
+          >
+            {content}
+          </a>
+        </Link>
+      );
+    }
+    return (
+      <ShadcnButton
+        ref={ref}
+        type={type}
+        variant={shadcnVariant}
+        size={shadcnSize}
+        disabled={disabled}
+        className={cn(isBlock && "w-full", className)}
+        {...props}
+      >
+        {content}
+      </ShadcnButton>
+    );
+  }
+);
+Button.displayName = "Button";
 
 export default Button;

@@ -7,7 +7,6 @@ const config = {
 
 function Chat() {
   if (!config.crispWebsiteId) {
-    console.warn("Crisp chat is disabled because website ID is not specified");
     return null;
   }
 

@@ -10,9 +10,9 @@ function IndexPage(props) {
     <>
       <Meta />
       <HeroSection
-        title="Premium leads for all your SaaS projects"
-        subtitle="Focus on building your amazing service and we will do the rest. We grew more than 10,000 online businesses."
-        strapline=""
+        title="Cakes, Cupcakes & Sweet Treats Made with Love"
+        subtitle="Custom cakes, themed birthday cakes, cupcakes, cake pops, tiramisu, dessert cups, cookies, and more—all made to order. Order your party desserts, cupcake bouquets, or a custom cake today."
+        strapline="Fresh from our kitchen"
         size="lg"
         bgColor="bg-white"
         bgImage=""
@@ -20,9 +20,9 @@ function IndexPage(props) {
         textColor=""
       />
       <FeaturesSection
-        title="The best tech under the hood"
-        subtitle="Build user friendly and modern dashboards using the latest tech. Now is the time with a best selling UI framework."
-        strapline="Created with passion"
+        title="What We Bake"
+        subtitle="Cakes, themed birthday cakes, cupcakes, cake pops, tiramisu, dessert cups & parfaits, cookies, bread, brownies, party orders, custom cakes, and cupcake bouquets—all made to order for you."
+        strapline="Our offerings"
         size="md"
         bgColor="bg-white"
         bgImage=""
@@ -30,9 +30,9 @@ function IndexPage(props) {
         textColor=""
       />
       <StatsSection2
-        title="Trusted by thousands of professionals"
-        subtitle="Web developers from all over the world are using our products. Join them and build something amazing!"
-        strapline="Inspiring Results"
+        title="Baked with care for our community"
+        subtitle="Join hundreds of happy customers who trust Sravs Signature Bakes for birthdays, parties, and everyday treats."
+        strapline="Why choose us"
         size="md"
         bgColor="bg-white"
         bgImage=""
@@ -40,8 +40,8 @@ function IndexPage(props) {
         textColor=""
       />
       <TestimonialsSection
-        title="Customer Testimonials"
-        subtitle=""
+        title="What Our Customers Say"
+        subtitle="Real stories from people who ordered our cakes, cake pops, themed treats, and custom desserts."
         strapline="Real Feedback"
         size="md"
         bgColor="bg-white"

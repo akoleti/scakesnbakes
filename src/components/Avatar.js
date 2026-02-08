@@ -1,25 +1,27 @@
 import React from "react";
+import { Avatar as ShadcnAvatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { cn } from "@/lib/utils";
 
-function Avatar(props) {
-  const { image, size = "md", alt, className } = props;
+const sizeClasses = {
+  sm: "size-16",
+  md: "size-20",
+  lg: "size-28",
+};
 
-  const classes = {
-    size: {
-      sm: "w-16 h-16",
-      md: "w-20 h-20",
-      lg: "w-28 h-28",
-    },
-  };
-
+function Avatar({ image, size = "md", alt, className }) {
   return (
-    <span
-      className={
-        `block rounded-full overflow-hidden border-2 border-gray-50 ${classes.size[size]}` +
-        (className ? ` ${className}` : "")
-      }
+    <ShadcnAvatar
+      className={cn(
+        sizeClasses[size],
+        "border-2 border-border",
+        className
+      )}
     >
-      <img src={image} alt={alt} />
-    </span>
+      <AvatarImage src={image} alt={alt} />
+      <AvatarFallback className="text-muted-foreground">
+        {alt ? alt.slice(0, 2).toUpperCase() : "?"}
+      </AvatarFallback>
+    </ShadcnAvatar>
   );
 }
 

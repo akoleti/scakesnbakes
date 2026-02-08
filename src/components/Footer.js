@@ -41,9 +41,9 @@ function Footer(props) {
                 ),
               },
             ].map((link, index) => (
-              <Link href={link.url} key={index}>
+              <Link href={link.url} key={index} legacyBehavior passHref>
                 <a
-                  className="text-gray-400 hover:text-blue-600"
+                  className="text-gray-400 hover:text-primary"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -64,7 +64,7 @@ function Footer(props) {
               { url: "/legal/terms-of-service", name: "Terms of Service" },
               { url: "/legal/privacy-policy", name: "Privacy Policy" },
             ].map((link, index) => (
-              <Link href={link.url} key={index}>
+              <Link href={link.url} key={index} legacyBehavior passHref>
                 <a className="font-medium text-gray-600 hover:text-gray-500">
                   {link.name}
                 </a>
@@ -72,7 +72,7 @@ function Footer(props) {
             ))}
           </nav>
           <div className="text-gray-600">
-            <span className="font-medium">Company Inc</span> ©
+            <span className="font-medium"><span className="font-script text-lg">Sravs</span> <span className="font-serif">Signature Bakes</span></span> ©
           </div>
         </div>
       </footer>

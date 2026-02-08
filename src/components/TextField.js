@@ -1,55 +1,35 @@
 import React from "react";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
 
-function TextField(props) {
-  const {
-    error,
-    type = "text",
-    size = "md",
-    label,
-    className,
-    inputRef,
-    ...inputProps
-  } = props;
-
-  const classes = {
-    base: "block border placeholder-gray-400 z-10 w-full rounded active:z-10 focus:z-10 -mr-px border-gray-200 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50",
-    size: {
-      sm: "py-2 leading-5",
-      md: "px-4 py-3 leading-6",
-      lg: "",
-    },
-  };
-
+const TextField = React.forwardRef(function TextField(
+  { error, type = "text", size = "md", label, className, id, ...inputProps },
+  ref
+) {
+  const inputId = id || inputProps.name;
+  const sizeClass = size === "sm" ? "h-8" : size === "lg" ? "h-11" : "";
+  const Comp = type === "textarea" ? Textarea : Input;
   return (
-    <div className={"w-full" + (className ? ` ${className}` : "")}>
+    <div className={cn("w-full", className)}>
       {label && (
-        <label className="block mb-1 font-medium" htmlFor={props.id}>
+        <Label htmlFor={inputId} className="mb-1.5 block font-medium">
           {label}
-        </label>
+        </Label>
       )}
-
-      {type === "textarea" && (
-        <textarea
-          className={`${classes.base} ${classes.size[size]}`}
-          ref={inputRef}
-          {...inputProps}
-        />
-      )}
-
-      {type !== "textarea" && (
-        <input
-          className={`${classes.base} ${classes.size[size]}`}
-          ref={inputRef}
-          type={type}
-          {...inputProps}
-        />
-      )}
-
+      <Comp
+        id={inputId}
+        className={sizeClass}
+        type={type === "textarea" ? undefined : type}
+        ref={ref}
+        {...inputProps}
+      />
       {error && (
-        <p className="text-sm text-left text-red-600 mt-1">{error.message}</p>
+        <p className="mt-1.5 text-sm text-destructive">{error.message}</p>
       )}
     </div>
   );
-}
+});
 
 export default TextField;

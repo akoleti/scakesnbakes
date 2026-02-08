@@ -7,27 +7,28 @@ import Products from "components/Products";
 function AboutPage(props) {
   return (
     <>
-      <Meta title="About" description="Learn about our company and team" />
+      <Meta title="About" description="Learn about Sravs Signature Bakes—cakes, cupcakes, bread, brownies, cookies, and custom orders." />
       <HeroSection2
         title={
           <>
-            We are <span className="font-light">TechCode</span>
+            We are <span className="font-script text-4xl">Sravs</span>{" "}
+            <span className="font-serif font-light">Signature Bakes</span>
           </>
         }
-        subtitle="A passionate team who are here to help you code and build your business using powerful tools."
+        subtitle="A small bakery dedicated to cakes, cupcakes, bread loaves, brownies, cookies, birthday party orders, custom cakes, and cupcake bouquets—all made fresh with care."
         strapline=""
         size="md"
         bgColor="bg-white"
         bgImage=""
         bgImageOpacity={1}
         textColor=""
-        leftImage="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?crop=entropy&fit=crop&h=800&w=1280"
-        rightImage="https://images.unsplash.com/photo-1554232456-8727aae0cfa4?crop=entropy&fit=crop&h=800&q=80&w=600"
+        leftImage="https://images.unsplash.com/photo-1578985545062-69986b85fde8?crop=entropy&fit=crop&h=800&w=1280"
+        rightImage="https://images.unsplash.com/photo-1488477181946-6428a0291777?crop=entropy&fit=crop&h=800&q=80&w=600"
       />
       <StatsSection
-        title="Trusted by thousands of professionals"
-        subtitle="Web developers from all over the world are using our products. Join them and build something amazing!"
-        strapline="Inspiring Results"
+        title="Baked fresh for you"
+        subtitle="We focus on quality ingredients, careful baking, and making every order special—whether it’s a single loaf of bread or a full party spread."
+        strapline="Our promise"
         size="md"
         bgColor="bg-white"
         bgImage=""
@@ -35,8 +36,8 @@ function AboutPage(props) {
         textColor=""
       />
       <Products
-        title="Meet our amazing team"
-        subtitle="They are working nonstop behind the scenes to help you build better products, web services and websites."
+        title="What we offer"
+        subtitle="Cakes, cupcakes, bread loaves, brownies, cookies, birthday party orders, custom cakes, and cupcake bouquets. Browse and order what you love."
         strapline=""
         size="md"
         bgColor="bg-white"

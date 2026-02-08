@@ -1,60 +1,86 @@
 import React from "react";
-import {
-  AdjustmentsVerticalIcon,
-  ChartPieIcon,
-  GlobeAmericasIcon,
-  BoltIcon,
-  PuzzlePieceIcon,
-  UsersIcon,
-} from "@heroicons/react/24/solid";
 import Section from "components/Section";
 import SectionHeader from "components/SectionHeader";
-import FeatureIcon from "components/FeatureIcon";
 
 function FeaturesSection(props) {
   const features = [
     {
-      title: "Customizable",
+      title: "Cakes",
       description:
-        "Fusce purus nisi, gravida sed consectetur ut, interdum quis nisi. Quisque egestas nisl id lectus facilisis scelerisque. Proin rhoncus dui at ligula vestibulum ut facilisis.",
-      icon: AdjustmentsVerticalIcon,
-      iconColor: "orange",
+        "Layer cakes, sheet cakes, and round cakes for any occasion. Moist, flavorful, and beautifully finished.",
+      image: "/products/sravs-bakes-33.jpeg",
     },
     {
-      title: "Rich Statistics",
+      title: "Cupcakes",
       description:
-        "Fusce purus nisi, gravida sed consectetur ut, interdum quis nisi. Quisque egestas nisl id lectus facilisis scelerisque. Proin rhoncus dui at ligula vestibulum ut facilisis.",
-      icon: ChartPieIcon,
-      iconColor: "red",
-    },
-
-    {
-      title: "Works globally",
-      description:
-        "Fusce purus nisi, gravida sed consectetur ut, interdum quis nisi. Quisque egestas nisl id lectus facilisis scelerisque. Proin rhoncus dui at ligula vestibulum ut facilisis.",
-      icon: GlobeAmericasIcon,
-      iconColor: "emerald",
+        "Classic and gourmet cupcakes in a variety of flavors and frostings. Perfect for parties and gifts.",
+      image: "/products/sravs-bakes-36.jpeg",
     },
     {
-      title: "Lighting fast UI",
+      title: "Cake Pops",
       description:
-        "Fusce purus nisi, gravida sed consectetur ut, interdum quis nisi. Quisque egestas nisl id lectus facilisis scelerisque. Proin rhoncus dui at ligula vestibulum ut facilisis.",
-      icon: BoltIcon,
-      iconColor: "purple",
+        "Individually wrapped cake pops in assorted flavors and colors. Perfect for party favors and sweet gifts.",
+      image: "/products/sravs-bakes-31.jpeg",
     },
     {
-      title: "Components",
+      title: "Themed Birthday Cakes",
       description:
-        "Fusce purus nisi, gravida sed consectetur ut, interdum quis nisi. Quisque egestas nisl id lectus facilisis scelerisque. Proin rhoncus dui at ligula vestibulum ut facilisis.",
-      icon: PuzzlePieceIcon,
-      iconColor: "blue",
+        "Kids’ themes, characters, and personalized designs. We bring your birthday vision to life.",
+      image: "/products/sravs-bakes-03.jpeg",
     },
     {
-      title: "Auto Auth",
+      title: "Themed Cupcake Sets",
       description:
-        "Fusce purus nisi, gravida sed consectetur ut, interdum quis nisi. Quisque egestas nisl id lectus facilisis scelerisque. Proin rhoncus dui at ligula vestibulum ut facilisis.",
-      icon: UsersIcon,
-      iconColor: "pink",
+        "Cupcake sets that match your cake or party theme. Coordinated flavors and designs for a polished look.",
+      image: "/products/sravs-bakes-04.jpeg",
+    },
+    {
+      title: "Tiramisu & Layer Cakes",
+      description:
+        "Signature mocha tiramisu and chocolate layer cakes. Elegant and indulgent for any celebration.",
+      image: "/products/sravs-bakes-34.jpeg",
+    },
+    {
+      title: "Dessert Cups & Parfaits",
+      description:
+        "Layered fruit parfaits and mini dessert cups. Perfect individual portions for events and catering.",
+      image: "/products/sravs-bakes-35.jpeg",
+    },
+    {
+      title: "Bread Loaves",
+      description:
+        "Fresh-baked bread loaves—white, whole wheat, sourdough, and more. Great for breakfast or dinner.",
+      image: "/products/sravs-bakes-37.jpeg",
+    },
+    {
+      title: "Brownies",
+      description:
+        "Fudgy, chewy brownies and blondies. Plain, nutty, or swirled—order by the pan or by the dozen.",
+      image: "/products/sravs-bakes-07.jpeg",
+    },
+    {
+      title: "Cookies",
+      description:
+        "Butter cookies, chocolate chip, frosted swirl, and seasonal varieties. Ideal for cookie trays and favors.",
+      image: "/products/sravs-bakes-02.jpeg",
+    },
+    {
+      title: "Birthday Party Orders",
+      description:
+        "Full dessert spreads for birthday parties: cakes, cupcakes, cookies, and more, all coordinated for your theme.",
+      image: "/products/sravs-bakes-03.jpeg",
+    },
+    {
+      title: "Custom Cakes",
+      description:
+        "One-of-a-kind cakes designed for you. Tell us your theme, flavors, and size—we’ll bring your vision to life.",
+      image: "/products/sravs-bakes-01.jpeg",
+    },
+    {
+      title: "Cupcake Bouquets",
+      description:
+        "Cupcakes arranged like a bouquet—perfect as a gift or centerpiece. Choose flavors and colors to match the occasion.",
+      image: "/products/sravs-bakes-30.jpeg",
     },
   ];
 
@@ -73,19 +99,19 @@ function FeaturesSection(props) {
           strapline={props.strapline}
           className="text-center"
         />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {features.map((feature, index) => (
             <div
-              className="group p-5 transition ease-out duration-200 rounded-2xl text-center"
+              className="group text-center"
               key={index}
             >
-              <FeatureIcon
-                color={feature.iconColor}
-                size="large"
-                className="mb-12"
-              >
-                <feature.icon />
-              </FeatureIcon>
+              <div className="relative overflow-hidden rounded-xl shadow-lg ring-1 ring-black/5 aspect-square w-full max-w-xs mx-auto mb-4">
+                <img
+                  src={feature.image}
+                  alt={feature.title}
+                  className="w-full h-full object-cover transition duration-200 group-hover:scale-105"
+                />
+              </div>
               <h4 className="text-lg font-bold mb-2">{feature.title}</h4>
               <p className="leading-relaxed text-gray-600">
                 {feature.description}

@@ -9,7 +9,7 @@ function Navbar(props) {
 
   const classes = {
     navLink:
-      "font-semibold inline-flex items-center space-x-1 h-8 px-4 group-hover:text-blue-500 py-6",
+      "font-semibold inline-flex items-center space-x-1 h-8 px-4 group-hover:text-primary py-6",
     navLinkIcon:
       "opacity-50 transform transition duration-200 ease-out group-hover:rotate-180 inline-block w-4 h-4",
     dropdown: {
@@ -22,8 +22,8 @@ function Navbar(props) {
       inner:
         "bg-white shadow-xl ring-1 ring-black ring-opacity-5 rounded-lg overflow-hidden",
       title:
-        "text-xs uppercase font-semibold tracking-wider text-blue-800 mb-5",
-      link: "text-gray-600 hover:text-blue-600 font-medium text-sm flex items-center space-x-2",
+        "text-xs uppercase font-semibold tracking-wider text-foreground mb-5",
+      link: "text-gray-600 hover:text-foreground font-medium text-sm flex items-center space-x-2",
       icon: "opacity-25 inline-block w-5 h-5",
       feature:
         "p-3 rounded-xl flex items-center space-x-4 text-gray-600 font-medium text-sm",
@@ -46,52 +46,39 @@ function Navbar(props) {
     <Section bgColor={props.bgColor}>
       <div className="container py-4">
         <div className="flex justify-between">
-          <Link href="/">
-            <a className="inline-flex items-center space-x-2 font-bold text-lg tracking-wide text-blue-600 hover:text-blue-400">
-              <svg
-                className="opacity-75 hi-outline hi-cube-transparent inline-block w-6 h-6"
-                stroke="currentColor"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"
-                />
-              </svg>
-              <span>Company</span>
+          <Link href="/" legacyBehavior passHref>
+            <a className="inline-flex items-center text-foreground hover:text-primary transition-colors">
+              <span className="text-lg tracking-wide whitespace-nowrap">
+                <span className="font-script text-2xl">Sravs</span>{" "}
+                <span className="font-serif font-semibold">Signature Bakes</span>
+              </span>
             </a>
           </Link>
           <div className="flex items-center ml-auto space-x-1 lg:space-x-4">
             <ul className="hidden lg:flex items-center ml-auto">
               <li className="relative group">
-                <Link href="/about">
-                  <a className={`${classes.navLink}`}>
-                    <span>About</span>
-                  </a>
+                <Link href="/about" legacyBehavior passHref>
+                  <a className={classes.navLink}><span>About</span></a>
                 </Link>
               </li>
               <li className="relative group">
-                <Link href="/products">
-                  <a className={`${classes.navLink}`}>
-                    <span>Products</span>
-                  </a>
+                <Link href="/products" legacyBehavior passHref>
+                  <a className={classes.navLink}><span>Products</span></a>
                 </Link>
               </li>
               <li className="relative group">
-                <Link href="/contact">
-                  <a className={`${classes.navLink}`}>
-                    <span>Contact</span>
-                  </a>
+                <Link href="/gallery" legacyBehavior passHref>
+                  <a className={classes.navLink}><span>Gallery</span></a>
                 </Link>
               </li>
               <li className="relative group">
-                <Link href="/order">
-                  <a className={`${classes.navLink}`}>
-                    <span>Order</span>
-                  </a>
+                <Link href="/contact" legacyBehavior passHref>
+                  <a className={classes.navLink}><span>Contact</span></a>
+                </Link>
+              </li>
+              <li className="relative group">
+                <Link href="/order" legacyBehavior passHref>
+                  <a className={classes.navLink}><span>Order</span></a>
                 </Link>
               </li>
             </ul>
@@ -109,17 +96,20 @@ function Navbar(props) {
           <div className="grid grid-cols-1 sm:grid-cols-3 border rounded-xl my-5">
             <div className="p-6 space-y-6">
               <nav className="flex flex-col space-y-3">
-                <Link href="/about">
-                  <a className={`${classes.dropdown.link}`}>About</a>
+                <Link href="/about" legacyBehavior passHref>
+                  <a className={classes.dropdown.link}>About</a>
                 </Link>
-                <Link href="/pricing">
-                  <a className={`${classes.dropdown.link}`}>Pricing</a>
+                <Link href="/products" legacyBehavior passHref>
+                  <a className={classes.dropdown.link}>Products</a>
                 </Link>
-                <Link href="/pricing">
-                  <a className={`${classes.dropdown.link}`}>Pricing</a>
+                <Link href="/gallery" legacyBehavior passHref>
+                  <a className={classes.dropdown.link}>Gallery</a>
                 </Link>
-                <Link href="/order">
-                  <a className={`${classes.dropdown.link}`}>Order</a>
+                <Link href="/contact" legacyBehavior passHref>
+                  <a className={classes.dropdown.link}>Contact</a>
+                </Link>
+                <Link href="/order" legacyBehavior passHref>
+                  <a className={classes.dropdown.link}>Order</a>
                 </Link>
               </nav>
             </div>
