@@ -52,14 +52,13 @@ const Button = React.forwardRef(
     );
     if (href) {
       return (
-        <Link href={href} legacyBehavior passHref>
-          <a
-            className={baseClass}
-            target={target}
-            ref={ref}
-          >
-            {content}
-          </a>
+        <Link
+          href={href}
+          className={baseClass}
+          target={target}
+          ref={ref}
+        >
+          {content}
         </Link>
       );
     }

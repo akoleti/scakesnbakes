@@ -9,6 +9,13 @@ function ImageLightbox({ src, alt, onClose, orderHref = "/order" }) {
     onClose();
   };
 
+  const handleOrderClick = () => {
+    document.body.style.overflow = "";
+    document.documentElement.style.overflow = "";
+    // Defer close so the link stays mounted and the browser can complete navigation
+    setTimeout(() => onClose(), 0);
+  };
+
   useEffect(() => {
     if (!src) {
       document.body.style.overflow = "";
@@ -54,7 +61,7 @@ function ImageLightbox({ src, alt, onClose, orderHref = "/order" }) {
         />
         <Link
           href={orderHref}
-          onClick={closeAndRestoreScroll}
+          onClick={handleOrderClick}
           className="inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow hover:bg-primary/90 transition-colors"
         >
           Order now
