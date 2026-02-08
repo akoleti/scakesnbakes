@@ -72,7 +72,7 @@ function ContactSection(props) {
                   type="text"
                   label="Name"
                   id="name"
-                  placeholder=""
+                  placeholder="Your name"
                   error={errors.name}
                   {...register("name")}
                 />
@@ -80,18 +80,45 @@ function ContactSection(props) {
                   type="email"
                   label="Email"
                   id="email"
-                  placeholder=""
+                  placeholder="you@example.com"
                   error={errors.email}
                   {...register("email", {
                     required: "Please enter an email address",
                   })}
                 />
               </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <TextField
+                  type="tel"
+                  label="Phone"
+                  id="phone"
+                  placeholder="+1 (555) 000-0000"
+                  error={errors.phone}
+                  {...register("phone")}
+                />
+                <div className="w-full">
+                  <label htmlFor="subject" className="mb-1.5 block font-medium text-foreground">
+                    Enquiry type
+                  </label>
+                  <select
+                    id="subject"
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 md:text-sm"
+                    {...register("subject")}
+                  >
+                    <option value="">Select...</option>
+                    <option value="General enquiry">General enquiry</option>
+                    <option value="Order">Order</option>
+                    <option value="Custom cake">Custom cake</option>
+                    <option value="Party / event">Party / event</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
               <TextField
                 type="textarea"
                 label="Message"
                 id="message"
-                placeholder=""
+                placeholder="Tell us what you need..."
                 rows={6}
                 error={errors.message}
                 {...register("message", {
